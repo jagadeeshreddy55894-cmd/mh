@@ -193,12 +193,12 @@
 
   .brown-box{
     width:100%;
-    background:#396b39;
+    background:var(--mess-color, #3d753d);
     padding:20px;
     border-bottom-left-radius:var(--card-radius);
     border-bottom-right-radius:var(--card-radius);
     margin-top:-12px;
-  }
+}
 
   .brown-inner{
     background:#FEFEFE;
@@ -365,6 +365,77 @@ function updateMeal() {
   document.getElementById("mealTitle").textContent = meal;
 }
 updateMeal();
+// ================================
+// HIDDEN COLOR CHANGER
+// Triple-tap the green box
+// ================================
+
+const brownBox = document.querySelector(".brown-box");
+
+let tapCount = 0;
+let tapTimer = null;
+
+const defaultColor = "#3d753d";
+
+// Load saved color
+const savedColor = localStorage.getItem("messPassColor");
+
+if (savedColor) {
+    brownBox.style.backgroundColor = savedColor;
+}
+
+// Detect triple tap
+brownBox.addEventListener("click", function () {
+
+    tapCount++;
+
+    clearTimeout(tapTimer);
+
+    tapTimer = setTimeout(() => {
+        tapCount = 0;
+    }, 600);
+
+    if (tapCount === 3) {
+
+        tapCount = 0;
+
+        // Create hidden color picker
+        const colorPicker = document.createElement("input");
+
+        colorPicker.type = "color";
+        colorPicker.value =
+            localStorage.getItem("messPassColor") || defaultColor;
+
+        colorPicker.style.position = "fixed";
+        colorPicker.style.left = "-100px";
+        colorPicker.style.top = "-100px";
+        colorPicker.style.opacity = "0";
+
+        document.body.appendChild(colorPicker);
+
+        // Open phone's color picker
+        colorPicker.click();
+
+        // When color changes
+        colorPicker.addEventListener("input", function () {
+
+            const newColor = this.value;
+
+            // Change immediately
+            brownBox.style.backgroundColor = newColor;
+
+            // Save permanently
+            localStorage.setItem("messPassColor", newColor);
+        });
+
+        // Remove temporary picker
+        colorPicker.addEventListener("change", function () {
+            setTimeout(() => {
+                colorPicker.remove();
+            }, 100);
+        });
+    }
+});
 </script>
 
 </body>
