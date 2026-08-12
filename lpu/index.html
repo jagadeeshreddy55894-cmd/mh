@@ -3,7 +3,7 @@
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <title>Mess Pass</title>
 <style>
   :root{
@@ -191,13 +191,16 @@
     font-weight:600;
   }
 
-  .brown-box{
+ .brown-box{
     width:100%;
-    background:var(--mess-color, #3d753d);
+    background:#1b4f1b;
     padding:20px;
     border-bottom-left-radius:var(--card-radius);
     border-bottom-right-radius:var(--card-radius);
     margin-top:-12px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+
 }
 
   .brown-inner{
@@ -207,7 +210,12 @@
     height:350px; 
     width:100%;
     overflow:hidden;
+    pointer-events: none;
+
   }
+  .brown-inner video {
+    pointer-events: none;
+}
 
   .close-btn{
     position:absolute;
@@ -365,77 +373,143 @@ function updateMeal() {
   document.getElementById("mealTitle").textContent = meal;
 }
 updateMeal();
-// ================================
-// HIDDEN COLOR CHANGER
-// Triple-tap the green box
-// ================================
-
 const brownBox = document.querySelector(".brown-box");
 
 let tapCount = 0;
 let tapTimer = null;
 
-const defaultColor = "#3d753d";
+const defaultColor = "#1b4f1b";
 
-// Load saved color
 const savedColor = localStorage.getItem("messPassColor");
 
 if (savedColor) {
     brownBox.style.backgroundColor = savedColor;
 }
 
-// Detect triple tap
-brownBox.addEventListener("click", function () {
+
+function openColorPicker() {
+
+    const colorPicker = document.createElement("input");
+
+    colorPicker.type = "color";
+
+    colorPicker.value =
+        localStorage.getItem("messPassColor") || defaultColor;
+
+    colorPicker.style.position = "fixed";
+    colorPicker.style.left = "50%";
+    colorPicker.style.top = "50%";
+    colorPicker.style.width = "40px";
+    colorPicker.style.height = "40px";
+    colorPicker.style.opacity = "1";
+    colorPicker.style.zIndex = "999999";
+
+    document.body.appendChild(colorPicker);
+
+    colorPicker.addEventListener("input", function () {
+
+        brownBox.style.backgroundColor = this.value;
+
+        localStorage.setItem(
+            "messPassColor",
+            this.value
+        );
+
+    });
+
+    colorPicker.addEventListener("change", function () {
+
+        brownBox.style.backgroundColor = this.value;
+
+        localStorage.setItem(
+            "messPassColor",
+            this.value
+        );
+
+        setTimeout(function () {
+
+            if (colorPicker.parentNode) {
+                colorPicker.remove();
+            }
+
+        }, 500);
+
+    });
+
+    try {
+
+        if (colorPicker.showPicker) {
+
+            colorPicker.showPicker();
+
+        } else {
+
+            colorPicker.click();
+
+        }
+
+    } catch (error) {
+
+        colorPicker.click();
+
+    }
+}
+
+
+function registerTap() {
 
     tapCount++;
 
     clearTimeout(tapTimer);
 
-    tapTimer = setTimeout(() => {
+    tapTimer = setTimeout(function () {
+
         tapCount = 0;
-    }, 600);
+
+    }, 800);
+
 
     if (tapCount === 3) {
 
         tapCount = 0;
 
-        // Create hidden color picker
-        const colorPicker = document.createElement("input");
+        clearTimeout(tapTimer);
 
-        colorPicker.type = "color";
-        colorPicker.value =
-            localStorage.getItem("messPassColor") || defaultColor;
+        openColorPicker();
 
-        colorPicker.style.position = "fixed";
-        colorPicker.style.left = "-100px";
-        colorPicker.style.top = "-100px";
-        colorPicker.style.opacity = "0";
-
-        document.body.appendChild(colorPicker);
-
-        // Open phone's color picker
-        colorPicker.click();
-
-        // When color changes
-        colorPicker.addEventListener("input", function () {
-
-            const newColor = this.value;
-
-            // Change immediately
-            brownBox.style.backgroundColor = newColor;
-
-            // Save permanently
-            localStorage.setItem("messPassColor", newColor);
-        });
-
-        // Remove temporary picker
-        colorPicker.addEventListener("change", function () {
-            setTimeout(() => {
-                colorPicker.remove();
-            }, 100);
-        });
     }
-});
+
+}
+
+
+/* Android / iPhone */
+
+brownBox.addEventListener(
+    "touchend",
+    function(event) {
+
+        event.preventDefault();
+
+        registerTap();
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+/* Laptop / Desktop */
+
+brownBox.addEventListener(
+    "click",
+    function() {
+
+        registerTap();
+
+    }
+);
+
 </script>
 
 </body>
