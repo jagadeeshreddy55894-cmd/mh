@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <title>Mess Pass</title>
@@ -18,7 +19,7 @@
   body{
     margin:0;
     font-family: 'Roboto', sans-serif;
-    background:f3f3f0;
+    background:#f3f3f0;
     color:var(--text);
   }
 
@@ -84,7 +85,7 @@
 
   .profile-row{
     display:flex;
-    gap:24px;   /* slight improvement */
+    gap:24px;   
     align-items:center;
     margin-top:12px;
   }
@@ -104,21 +105,18 @@
     object-position: center 10%;
   }
 
-  /* ✅ QR BOX */
   .qr-box{
-  width:148px;
-  height:138px;
-  background:#fff;
-  border:1px solid #333;   /* darker clean border */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-top:6px;
-  overflow:hidden;         /* removes inner spacing effect */
-  box-shadow:0 12px 26px rgba(0,0,0,0.18);
-}
-
-  .title-col{flex:1;}
+    width:148px;
+    height:138px;
+    background:#fff;
+    border:1px solid #333;   
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:6px;
+    overflow:hidden;         
+    box-shadow:0 12px 26px rgba(0,0,0,0.18);
+  }
 
   .meal-title{
     font-size:16px;
@@ -152,8 +150,7 @@
     line-height:1.4;
     letter-spacing:0.1px; 
     color:#222;
-   text-shadow:0px 1px 2px rgba(0,0,0,0.4);
-   
+    text-shadow:0px 1px 2px rgba(0,0,0,0.4);
   }
 
   .dt-row{
@@ -189,6 +186,7 @@
     background:#f3f3f0;
     font-size:16px;
     font-weight:600;
+    cursor:pointer;
   }
 
   .brown-box{
@@ -198,9 +196,9 @@
     border-bottom-left-radius:var(--card-radius);
     border-bottom-right-radius:var(--card-radius);
     margin-top:-12px;
-   touch-action: manipulation;
+    touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-}
+  }
   .brown-inner{
     background:#FEFEFE;
     border-radius:10px;
@@ -212,52 +210,183 @@
   }
   .brown-inner video {
     pointer-events: none;
-}
-
-  .close-btn{
-    position:absolute;
-    right:12px;
-    top:32px;
-    background:transparent;
-    border:none;
-    font-size:16px;
-    color:#f0f0f0;
-    font-weight:800;
-    cursor:pointer;
   }
+
   .left-col{
-  width:145px;   /* same as image & QR */
-  text-align:center;
-  margin-top:10px;   /* controls gap */
-}
-.right-col{
-  width:145px;   /* same as image & QR */
-  text-align:center;
-  margin-top:3px;
-}
+    width:145px;   
+    text-align:center;
+    margin-top:10px;   
+  }
+  .right-col{
+    width:145px;   
+    text-align:center;
+    margin-top:3px;
+  }
 
-.left-col .sid, .left-col .line,
-.right-col .meal-title, .right-col .line{
-  margin-left:0;
-}
-.assigned-mess{
-  font-size:16px;
-  font-weight:400;
-  margin-top:-20px;   /* adjust spacing */
-  margin-bottom:38px;
-  text-align:center;
-  margin-left:0px;
-  letter-spacing:0.1px; 
-  color:#222;
-  text-shadow:0px 1px 2px rgba(0,0,0,0.4);
-  
-}
-.qr-img{
-  width:105%;
-  height:105%;
-  object-fit:cover;
-}
+  .left-col .sid, .left-col .line,
+  .right-col .meal-title, .right-col .line{
+    margin-left:0;
+  }
+  .assigned-mess{
+    font-size:16px;
+    font-weight:400;
+    margin-top:-20px;   
+    margin-bottom:38px;
+    text-align:center;
+    margin-left:0px;
+    letter-spacing:0.1px; 
+    color:#222;
+    text-shadow:0px 1px 2px rgba(0,0,0,0.4);
+  }
+  .qr-img{
+    width:105%;
+    height:105%;
+    object-fit:cover;
+  }
 
+  /* Exactly matching your screenshot style for the details section below the box */
+  .details-card {
+    width: 97%;
+    max-width: var(--card-max);
+    margin-top: 18px;
+    background-color: #f2f2f2;
+    border-radius: var(--card-radius);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .pass-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .pass-detail-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #8c8c8c;
+  }
+
+  .pass-detail-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1b1b1b;
+    line-height: 1.35;
+  }
+
+  .verification-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border: 2px solid #1b1b1b;
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-top: 4px;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .verification-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1b1b1b;
+  }
+
+  .verification-code {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #1b1b1b;
+  }
+
+  /* Secret Hidden Editor Modal */
+  .secret-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 999;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .secret-modal.open {
+    display: flex;
+  }
+
+  .secret-panel {
+    background: #ffffff;
+    width: 100%;
+    max-width: 360px;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+  }
+
+  .secret-panel h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1b1b1b;
+    margin-bottom: 4px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .input-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+  }
+
+  .input-group input {
+    padding: 8px 10px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #1b1b1b;
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .btn-save {
+    flex: 1;
+    padding: 10px;
+    background: #1b1b1b;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-cancel {
+    padding: 10px 14px;
+    background: #e5e5e5;
+    color: #1b1b1b;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
@@ -268,7 +397,7 @@
     <button class="close-btn" onclick="history.back()">✕</button>
 </div>
 
-<div class="wrap">
+<div class="wrap" style="flex-direction: column; align-items: center;">
   <article class="card">
 
     <div class="timer" id="timerEl">30</div>
@@ -281,8 +410,8 @@
       <img src="profile.jpg" class="avatar-img">
     </div>
     <div class="left-col">
-      <div class="sid">12311216</div>
-      <div class="line">Raj Vardhan</div>
+      <div class="sid">12311286</div>
+      <div class="line">Borra Ajay Kumar</div>
     </div>
   </div>
 
@@ -301,9 +430,9 @@
       <div class="course">
         P132: B.Tech. (Computer Science and Engineering)(2023)
       </div>
-    <div class="assigned-mess">
-  Your Assigned Mess - Mess BH-4
-</div>
+      <div class="assigned-mess">
+        Your Assigned Mess - Mess BH-4
+      </div>
 
       <div class="dt-row">
         <div class="date" id="dateText">Nov 20, 2025</div>
@@ -312,8 +441,8 @@
 
       <div class="approved">Meal Approved</div>
 
-      <div class="rate-wrap">                                   <button class="rate-btn" onclick="window.location.href='feedback.html'">
-       ⭐ RATE US</button>
+      <div class="rate-wrap">                                   
+        <button class="rate-btn" onclick="window.location.href='feedback.html'">⭐ RATE US</button>
       </div>
 
     </div>
@@ -332,6 +461,66 @@
     </div>
 
   </article>
+
+  <!-- Details card placed cleanly below the main box matching your screenshot layout -->
+  <div class="details-card">
+      <div class="pass-detail-item">
+          <div class="pass-detail-label">Father's Name</div>
+          <div class="pass-detail-value" id="valFather">Mahesh KC (9483746197)</div>
+      </div>
+
+      <div class="pass-detail-item">
+          <div class="pass-detail-label">Mother's Name</div>
+          <div class="pass-detail-value" id="valMother">Reetha()</div>
+      </div>
+
+      <div class="pass-detail-item">
+          <div class="pass-detail-label">Program</div>
+          <div class="pass-detail-value" id="valProgram">P132:B.Tech. (Computer Science and Engineering)(2022)</div>
+      </div>
+
+      <div class="pass-detail-item">
+          <div class="pass-detail-label">Hostel</div>
+          <div class="pass-detail-value" id="valHostel">Boys Hostel-04-B511-Bed C Mess</div>
+      </div>
+
+      <!-- Secret Trigger: Tap this box 5 times quickly to open editor -->
+      <div class="verification-box" id="secretTrigger">
+          <span class="verification-label">Verification Code</span>
+          <span class="verification-code" id="verificationCode"></span>
+      </div>
+  </div>
+</div>
+
+<!-- Hidden Secret Edit Popup -->
+<div class="secret-modal" id="secretModal">
+    <div class="secret-panel">
+        <h3>Edit Details</h3>
+        <div class="input-group">
+            <label>Father's Name</label>
+            <input type="text" id="inFather">
+        </div>
+        <div class="input-group">
+            <label>Mother's Name</label>
+            <input type="text" id="inMother">
+        </div>
+        <div class="input-group">
+            <label>Program</label>
+            <input type="text" id="inProgram">
+        </div>
+        <div class="input-group">
+            <label>Hostel</label>
+            <input type="text" id="inHostel">
+        </div>
+        <div class="input-group">
+            <label>Verification Code (leave blank for random)</label>
+            <input type="text" id="inCode" maxlength="8">
+        </div>
+        <div class="btn-row">
+            <button class="btn-cancel" id="cancelBtn">Cancel</button>
+            <button class="btn-save" id="saveBtn">Save</button>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -383,9 +572,7 @@ if (savedColor) {
     brownBox.style.backgroundColor = savedColor;
 }
 
-
 function askForColor() {
-
     const currentColor =
         localStorage.getItem("messPassColor") || defaultColor;
 
@@ -399,89 +586,115 @@ function askForColor() {
     }
 
     const newColor = color.trim();
-
-    /*
-       Check whether the entered value
-       is a valid HTML/CSS color.
-    */
-
     const test = new Option().style;
-
     test.color = newColor;
 
     if (test.color === "") {
-
         alert(
             "Invalid color code!\n\nPlease enter a valid HTML color code.\nExample: #FF0000"
         );
-
         return;
     }
 
     brownBox.style.backgroundColor = newColor;
-
     localStorage.setItem(
         "messPassColor",
         newColor
     );
-
 }
-
 
 function registerTap() {
-
     tapCount++;
-
     clearTimeout(tapTimer);
-
     tapTimer = setTimeout(function () {
-
         tapCount = 0;
-
     }, 800);
 
-
     if (tapCount === 3) {
-
         tapCount = 0;
-
         clearTimeout(tapTimer);
-
         askForColor();
-
     }
-
 }
 
-
 /* Mobile */
-
 brownBox.addEventListener(
     "touchend",
     function(event) {
-
         event.preventDefault();
-
         registerTap();
-
     },
     {
         passive:false
     }
 );
 
-
 /* Laptop/Desktop */
-
 brownBox.addEventListener(
     "click",
     function() {
-
         registerTap();
-
     }
 );
 
+/* Details Secret Editor Logic */
+const elFather = document.getElementById('valFather');
+const elMother = document.getElementById('valMother');
+const elProgram = document.getElementById('valProgram');
+const elHostel = document.getElementById('valHostel');
+const elCode = document.getElementById('verificationCode');
+
+function generateRandomCode() {
+    return Math.floor(10000000 + Math.random() * 90000000);
+}
+
+function loadValues() {
+    const saved = JSON.parse(localStorage.getItem('passDetails') || '{}');
+    if (saved.father) elFather.textContent = saved.father;
+    if (saved.mother) elMother.textContent = saved.mother;
+    if (saved.program) elProgram.textContent = saved.program;
+    if (saved.hostel) elHostel.textContent = saved.hostel;
+    elCode.textContent = saved.code ? saved.code : generateRandomCode();
+}
+loadValues();
+
+let detailTapCount = 0;
+let detailTapTimer = null;
+const secretTrigger = document.getElementById('secretTrigger');
+const secretModal = document.getElementById('secretModal');
+
+secretTrigger.addEventListener('click', () => {
+    detailTapCount++;
+    clearTimeout(detailTapTimer);
+    detailTapTimer = setTimeout(() => { detailTapCount = 0; }, 1200);
+
+    if (detailTapCount >= 5) {
+        detailTapCount = 0;
+        document.getElementById('inFather').value = elFather.textContent;
+        document.getElementById('inMother').value = elMother.textContent;
+        document.getElementById('inProgram').value = elProgram.textContent;
+        document.getElementById('inHostel').value = elHostel.textContent;
+        document.getElementById('inCode').value = '';
+        secretModal.classList.add('open');
+    }
+});
+
+document.getElementById('cancelBtn').addEventListener('click', () => {
+    secretModal.classList.remove('open');
+});
+
+document.getElementById('saveBtn').addEventListener('click', () => {
+    const updated = {
+        father: document.getElementById('inFather').value.trim(),
+        mother: document.getElementById('inMother').value.trim(),
+        program: document.getElementById('inProgram').value.trim(),
+        hostel: document.getElementById('inHostel').value.trim(),
+        code: document.getElementById('inCode').value.trim()
+    };
+    localStorage.setItem('passDetails', JSON.stringify(updated));
+    loadValues();
+    secretModal.classList.remove('open');
+});
 </script>
 
 </body>
