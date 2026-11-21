@@ -446,22 +446,6 @@ button,input{font:inherit}
 }
 
 
-/* Fix: Code 1 and Code 2 both used the class name .verification-code.
-   In Code 1 it styles the whole bordered box; in Code 2 it styles only the number.
-   Reset the conflicting Code 1 box styles only while the Code 2 pass is visible. */
-body.pass-view .verification-code {
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  display: inline;
-  align-items: initial;
-  justify-content: initial;
-  gap: normal;
-  background: transparent;
-  box-sizing: content-box;
-}
-
 /* ===== Code 2: Meal-approved pass interface (merged without redesign) ===== */
 
   :root{
@@ -1021,7 +1005,7 @@ async function showCoupon(){
  <div class="meal-grid"><button class="meal" data-meal="Breakfast">BreakFast <span>→</span></button><button class="meal" data-meal="Lunch">Lunch <span>→</span></button><button class="meal" data-meal="Dinner">Dinner <span>→</span></button></div>
  ${getFeedbackModalMarkup()}
  </div></div>`;
- document.querySelectorAll('.meal').forEach(b=>b.onclick=async()=>{selectedMeal=b.dataset.meal;try{const a=document.getElementById('scanBeep');if(a){a.load();const p=a.play();if(p)p.then(()=>{a.pause();a.currentTime=0}).catch(()=>{})}}catch(e){}showScanner()});
+ document.querySelectorAll('.meal').forEach(b=>b.onclick=()=>{selectedMeal=b.dataset.meal;showScanner()});
  let profileTapCount = 0, profileTapTimer = null;
  const profileCard = document.getElementById('profilePhotoAccess');
  if (profileCard) {
@@ -1053,11 +1037,18 @@ async function showScanner(){
    <div class="camera-shade"></div>
    <div class="scan-frame"></div>
    <div class="scan-line"></div>
-   <audio id="scanBeep" src="./sounds/beep_sound_trimmed.mp3" preload="auto"></audio>
+   <audio id="scanBeep" src="./sounds_beep_sound_trimmed.mp3" preload="auto"></audio>
    ${dotsMarkup}
  </div>`;
 
  const video=document.getElementById('camera');
+ const scanBeep=document.getElementById('scanBeep');
+ // Start the beep directly from the meal-button tap, before the camera permission await.
+ if(scanBeep){
+   scanBeep.currentTime=0;
+   const beepPromise=scanBeep.play();
+   if(beepPromise) beepPromise.catch(error=>console.warn('Beep playback failed:',error));
+ }
  const dots=[...document.querySelectorAll('.dot')];
  let particleTimer=null;
  let running=true;
@@ -1122,14 +1113,6 @@ async function showScanner(){
  }catch(err){
    // Keep the scanner animation completely clean even if camera permission fails.
  }
-
- const scanBeep=document.getElementById('scanBeep');
- setTimeout(()=>{
-   if(scanBeep){
-     scanBeep.currentTime=0;
-     scanBeep.play().catch(()=>{});
-   }
- },3500);
 
  setTimeout(()=>{
    running=false;
